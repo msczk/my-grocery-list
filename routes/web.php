@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+// Routes application (application utilisateur)
+
+Route::prefix('application')->group(function () {
+    
+    // Tableau de bord
+    Route::get('/dashboard', [App\Http\Controllers\Application\DashboardController::class, 'index'])->name('application.dashboard');
+});

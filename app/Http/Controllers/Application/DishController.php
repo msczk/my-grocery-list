@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Application;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class GroceryListController extends Controller
+class DishController extends Controller
 {
     /**
      * Create a new controller instance.
