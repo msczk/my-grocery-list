@@ -7,8 +7,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -18,18 +16,36 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <title>@yield('title') - {{ config('app.name') }}</title>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navigation {{ config('app.name', 'Laravel') }}">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+                <a class="navbar-brand" href="{{ route('application.dashboard') }}">{{ config('app.name', 'Laravel') }}</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarsExample04">
-                    
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link {{ (request()->is('application/dashboard*')) ? 'active' : '' }}" aria-current="page" href="{{ route('application.dashboard') }}">{{ __('Tableau de bord') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ __('Mes listes') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ __('Mes plannings') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ __('Produits') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ __('Repas') }}</a>
+                        </li>
+                    </ul>
                     <ul class="navbar-nav mb-2 mb-md-0">
                         @guest
                             @if (Route::has('login'))
@@ -69,6 +85,11 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <footer class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4 border-top">
+            <div class="col d-flex justify-content-center">
+                <span class="mb-3 mb-md-0 text-body-secondary">© 2023 MyGroceryList</span>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
